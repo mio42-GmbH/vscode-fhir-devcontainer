@@ -1,5 +1,5 @@
 ### NODE ALPINE
-FROM ghcr.io/mio42-gmbh/devcontainer-base:${SUSHI_VERSION}-alpine as node-alpine
+FROM ghcr.io/mio42-gmbh/devcontainer-base:alpine as node-alpine
 RUN apk update \
     && apk add nodejs npm
 # Update sources for nodejs
@@ -9,7 +9,7 @@ RUN apk update \
 #     nodejs
 
 ### NODE UBUNTU
-FROM ghcr.io/mio42-gmbh/devcontainer-base:${SUSHI_VERSION}-ubuntu as node-ubuntu
+FROM ghcr.io/mio42-gmbh/devcontainer-base:ubuntu as node-ubuntu
 # Update sources for nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 RUN apt update \
