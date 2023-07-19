@@ -1,5 +1,5 @@
 ### NODE ALPINE
-FROM mcr.microsoft.com/devcontainers/base:alpine as node-alpine
+FROM ghcr.io/mio42-gmbh/devcontainer-base:${SUSHI_VERSION}-alpine as node-alpine
 RUN apk update \
     && apk add nodejs npm
 # Update sources for nodejs
@@ -9,7 +9,7 @@ RUN apk update \
 #     nodejs
 
 ### NODE UBUNTU
-FROM mcr.microsoft.com/devcontainers/base:ubuntu as node-ubuntu
+FROM ghcr.io/mio42-gmbh/devcontainer-base:${SUSHI_VERSION}-ubuntu as node-ubuntu
 # Update sources for nodejs
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 RUN apt update \
@@ -17,17 +17,17 @@ RUN apt update \
     nodejs
 
 ### SUSHI ALPINE
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/node:alpine as fsh-sushi-alpine
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/node:alpine as fsh-sushi-alpine
 ARG SUSHI_VERSION=
 RUN npm install -g fsh-sushi@${SUSHI_VERSION}
 
 ### SUSHI UBUNTU
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/node:ubuntu as fsh-sushi-ubuntu
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/node:ubuntu as fsh-sushi-ubuntu
 ARG SUSHI_VERSION=
 RUN npm install -g fsh-sushi@${SUSHI_VERSION}
 
 ### PUB BASE ALPINE
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/node:alpine AS pub-base-alpine
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/node:alpine AS pub-base-alpine
 RUN apk update \
     && apk add --no-cache \
     openjdk17-jdk \
@@ -43,7 +43,7 @@ RUN wget -q -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/release
     && chmod a+x /workspaces/validate.sh
 
 ### RUB BASE UBUNTU
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/node:ubuntu AS pub-base-ubuntu
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/node:ubuntu AS pub-base-ubuntu
 RUN apt update \
     && apt install -y \
     openjdk-17-jdk \
@@ -58,11 +58,11 @@ RUN wget -q -P /workspaces https://github.com/hapifhir/org.hl7.fhir.core/release
     && chmod a+x /workspaces/validate.sh
 
 ### IG PUBLISHER ALPINE
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/pub-base:alpine as ig-publisher-alpine
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/pub-base:alpine as ig-publisher-alpine
 ARG SUSHI_VERSION=
 RUN npm install -g fsh-sushi@${SUSHI_VERSION}
 
 ### IG PUBLISHER UBUNTU
-FROM ghcr.io/cybernop/vscode-fhir-devcontainer/pub-base:ubuntu as ig-publisher-ubuntu
+FROM ghcr.io/mio42-gmbh/vscode-fhir-devcontainer/pub-base:ubuntu as ig-publisher-ubuntu
 ARG SUSHI_VERSION=
 RUN npm install -g fsh-sushi@${SUSHI_VERSION}
