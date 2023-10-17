@@ -33,7 +33,9 @@ RUN apk update \
     openjdk17-jdk \
     ruby-dev \
     msttcorefonts-installer \
-    fontconfig
+    fontconfig \
+    musl-dev \
+    linux-headers
 RUN gem install jekyll
 RUN update-ms-fonts
 RUN wget -q -P /workspaces https://raw.githubusercontent.com/HL7/ig-publisher-scripts/main/_updatePublisher.sh \
